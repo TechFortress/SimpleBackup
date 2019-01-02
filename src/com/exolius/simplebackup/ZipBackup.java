@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -22,6 +23,7 @@ public class ZipBackup extends BackupFileManager {
         Date date = new Date();
         File backupFile = new File(backupFolder, getFileName(date));
         ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(backupFile));
+        zip.setLevel(Deflater.BEST_COMPRESSION);
         try {
             for (File worldFolder : worldFolders) {
                 logger.info("Backing up " + worldFolder);
